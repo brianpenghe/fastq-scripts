@@ -29,6 +29,9 @@ def run():
     inputfilename = sys.argv[1]
     config = sys.argv[2]
 
+
+# the following part builds index dictionary
+
     StatsDict={}
     IndexDict={}
     input_stream = open(config)
@@ -42,6 +45,7 @@ def run():
 
     StatsDict['others']=0
 
+#This part scans the input fastq
     BarcodeSeqCounts={}
 
     processed=0
