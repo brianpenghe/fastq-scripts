@@ -62,9 +62,9 @@ def run():
             i=0
             if line1.startswith(barcodeSeq):
                 if doStdOut:
-                    print line0 + line1 + line2 + line3.strip()
+                    print line0 + line1 + line2 + line3.strip() + '\n'
                 else:
-                    outfile.write(line0 + line1 + line2 + line3.strip())
+                    outfile.write(line0 + line1 + line2 + line3.strip() + '\n')
             continue
 
     if not doStdOut:
