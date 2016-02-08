@@ -17,7 +17,7 @@ except:
 def run():
 
     if len(sys.argv) < 2:
-        print 'usage: python %s input outfilename barcodeSeq ' % sys.argv[0]
+        print 'usage: python %s input outfilename barcodeSeq [-v]' % sys.argv[0]
         print '\tuse - for stdinout instead a input or output filename'
         sys.exit(1)
 
@@ -60,11 +60,11 @@ def run():
         if i == 4:
             line3 = line
             i=0
-            if line1.startswith(barcodeSeq):
+            if (line1.startswith(barcodeSeq) and '-v' not in sys.argv) or (not line1.startswith(barcodeSeq) and '-v' in sys.argv):
                 if doStdOut:
-                    print line0 + line1 + line2 + line3.strip() + '\n'
+                    print line0 + line1 + line2 + line3.strip()
                 else:
-                    outfile.write(line0 + line1 + line2 + line3.strip() + '\n')
+                    outfile.write(line0 + line1 + line2 + line3.strip())
             continue
 
     if not doStdOut:
