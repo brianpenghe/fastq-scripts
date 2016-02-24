@@ -15,7 +15,7 @@ while [ $i -lt $barc_len ]
 		grep ^${barcode:$i:$(echo $barc_len-$i | bc)} $2 | wc -l >> testTrim5
 		i=$i+1
 	done
-grep -v @ $2 | grep -v + | sort | uniq -c | sort -k1,1nr | head -50
+grep -v @ $2 | grep -v + | grep -v D | sort | uniq -c | sort -k1,1nr | head -50
  
 
 
