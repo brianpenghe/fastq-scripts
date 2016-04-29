@@ -14,41 +14,41 @@ try:
 except:
 	pass
 
-def run():
+def main(argv):
 
-    if len(sys.argv) < 3:
-        print 'usage: python %s <list of input files> outfileprefix <bpToKeep | max> [-trim5 bp] [-flowcellID flowcell] [-addEnd 1 | 2] [-replace string newstring | blank]' % sys.argv[0]
+    if len(argv) < 3:
+        print 'usage: python %s <list of input files> outfileprefix <bpToKeep | max> [-trim5 bp] [-flowcellID flowcell] [-addEnd 1 | 2] [-replace string newstring | blank]' % argv[0]
         sys.exit(1)
 
-    inputfilename = sys.argv[1]
+    inputfilename = argv[1]
     doMax=False
-    if sys.argv[3] == 'max':
+    if argv[3] == 'max':
         doMax=True
         trim='max'
     else: 
-        trim = int(sys.argv[3])
-    outputfilename = sys.argv[2] + '.' + str(trim) + 'mers.fastq'
+        trim = int(argv[3])
+    outputfilename = argv[2] + '.' + str(trim) + 'mers.fastq'
     doFlowcellID=False
-    if '-flowcellID' in sys.argv:
+    if '-flowcellID' in argv:
         doFlowcellID=True
-        flowcellID=sys.argv[sys.argv.index('-flowcellID')+1]
+        flowcellID=argv[argv.index('-flowcellID')+1]
         print 'will include flowcell ID', flowcellID, 'in reads headers'
     dotrim5=False
-    if '-trim5' in sys.argv:
+    if '-trim5' in argv:
         dotrim5=True
-        trim=int(sys.argv[sys.argv.index('-trim5')+1])
+        trim=int(argv[argv.index('-trim5')+1])
         print 'will trim ', trim, 'bp from the 5-end'
         outputfilename = inputfilename.split('.fastq')[0] + '.' +str(trim)+'bp-5prim-trim.fastq'
     doAddEnd=False
-    if '-addEnd' in sys.argv:
+    if '-addEnd' in argv:
         doAddEnd=True
-        END=sys.argv[sys.argv.index('-addEnd')+1]
+        END=argv[argv.index('-addEnd')+1]
         print 'will add',  '/'+END, 'to read IDs'
     doReplace=False
-    if '-replace' in sys.argv:
+    if '-replace' in argv:
         doReplace=True
-        oldstring=sys.argv[sys.argv.index('-replace')+1]
-        newstring=sys.argv[sys.argv.index('-replace')+2]
+        oldstring=argv[argv.index('-replace')+1]
+        newstring=argv[argv.index('-replace')+2]
         if newstring == 'blank':
             newstring=''
         print 'will replace',  oldstring, 'with', newstring, 'in read IDs'
@@ -162,5 +162,8 @@ def run():
 
     if shorter>0:
         print shorter, 'sequences shorter than desired length'
-run()
+
+
+if __name__ == '__main__':
+    main(sys.argv)
 

@@ -14,17 +14,17 @@ try:
 except:
 	pass
 
-def run():
+def main(argv):
 
-    if len(sys.argv) < 3:
-        print 'usage: python %s fastq_end1 fastq_end2 config ' % sys.argv[0]
+    if len(argv) < 3:
+        print 'usage: python %s fastq_end1 fastq_end2 config ' % argv[0]
         print 'format of the config file: <index sequence> <tab> <outputfile prefix>'
         print 'the second fastq file is assumed to have the barcode, and match its strand; it need not be trimmed to match the index length'
         sys.exit(1)
 
-    end1 = sys.argv[1]
-    end2 = sys.argv[2]
-    config = sys.argv[3]
+    end1 = argv[1]
+    end2 = argv[2]
+    config = argv[3]
 
     IndexDict={}
     StatsDict={}
@@ -115,5 +115,6 @@ def run():
 
     outfile.close()
 
-run()
+if __name__ == '__main__':
+    main(sys.argv)
 

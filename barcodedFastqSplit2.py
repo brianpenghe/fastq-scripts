@@ -14,10 +14,10 @@ try:
 except:
 	pass
 
-def run():
+def main(argv):
 
-    if len(sys.argv) < 2:
-        print 'usage: python %s fastq config ' % sys.argv[0]
+    if len(argv) < 2:
+        print 'usage: python %s fastq config ' % argv[0]
         print 'format of the config file: <index sequence> <tab> <outputfile prefix>'
         print 'assumed format of the input fastq file:'
         print '    @HWI-ST501_0041:2:1:1398:2028#ATCACG/1'
@@ -26,8 +26,8 @@ def run():
         print '    [XTRRTVW[bSa`TXOMW_TbbbV\KJZWTYNT``BBBBBBBBBBBBBBB'
         sys.exit(1)
 
-    inputfilename = sys.argv[1]
-    config = sys.argv[2]
+    inputfilename = argv[1]
+    config = argv[2]
 
 
 # the following part builds index dictionary
@@ -101,5 +101,6 @@ def run():
         outline=barcode+'\t'+str(BarcodeSeqCounts[barcode])
         outfile.write(outline+'\n')
 
-run()
+if __name__ == '__main__':
+    main(sys.argv)
 

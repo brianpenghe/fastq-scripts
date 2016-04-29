@@ -15,47 +15,47 @@ try:
 except:
 	pass
 
-def run():
+def main(argv):
 
-    if len(sys.argv) < 2:
-        print 'usage: python %s <inputfilename> <bpToKeep | max> [-trim5 bp] [-flowcellID flowcell] [-addEnd 1 | 2] [-replace string newstring | blank] [-renameIDs prefix] [-stdout]' % sys.argv[0]
+    if len(argv) < 2:
+        print 'usage: python %s <inputfilename> <bpToKeep | max> [-trim5 bp] [-flowcellID flowcell] [-addEnd 1 | 2] [-replace string newstring | blank] [-renameIDs prefix] [-stdout]' % argv[0]
         print '\tthe -trim5 option will trim additional bp from the 5 end, i.e. if you want the middle 36bp of 38bp reads, use 36 as bp to keep and 1 as the trim5 argument'
         print '\tUse - to specify standard input, and the -stdout option to tell the script to print to standard output'
         print '\tThe script can read compressed files as long as they have the correct suffix - .bz2 or .gz'
         print '\tReplace inputfilename with - if you want to read from standard input'
         sys.exit(1)
 
-    inputfilename = sys.argv[1]
+    inputfilename = argv[1]
     doMax=False
-    if sys.argv[2] == 'max':
+    if argv[2] == 'max':
         doMax=True
         trim='max'
     else: 
-        trim = int(sys.argv[2])
+        trim = int(argv[2])
     outputfilename = inputfilename.split('/')[-1].split('.fastq')[0] + '.' +str(trim)+'mers.fastq'
     doFlowcellID=False
 
     doStdOut=False
-    if '-stdout' in sys.argv:
+    if '-stdout' in argv:
         doStdOut = True
 
-    if '-flowcellID' in sys.argv:
+    if '-flowcellID' in argv:
         doFlowcellID=True
-        flowcellID=sys.argv[sys.argv.index('-flowcellID')+1]
+        flowcellID=argv[argv.index('-flowcellID')+1]
         if doStdOut:
             pass
         else:
             print 'will include flowcell ID', flowcellID, 'in reads headers'
 
     doRenameIDs = False
-    if '-renameIDs' in sys.argv:
+    if '-renameIDs' in argv:
         doRenameIDs = True
-        RID = '@' + sys.argv[sys.argv.index('-renameIDs') + 1]
+        RID = '@' + argv[argv.index('-renameIDs') + 1]
 
     dotrim5=False
-    if '-trim5' in sys.argv:
+    if '-trim5' in argv:
         dotrim5=True
-        trim5=int(sys.argv[sys.argv.index('-trim5')+1])
+        trim5=int(argv[argv.index('-trim5')+1])
         if doStdOut:
             pass
         else:
@@ -63,19 +63,19 @@ def run():
         outputfilename = inputfilename.split('.fastq')[0] + '.' +str(trim)+'bp-5prim-trim.fastq'
 
     doAddEnd=False
-    if '-addEnd' in sys.argv:
+    if '-addEnd' in argv:
         doAddEnd=True
-        END=sys.argv[sys.argv.index('-addEnd')+1]
+        END=argv[argv.index('-addEnd')+1]
         if doStdOut:
             pass
         else:
             print 'will add',  '/'+END, 'to read IDs'
 
     doReplace=False
-    if '-replace' in sys.argv:
+    if '-replace' in argv:
         doReplace=True
-        oldstring=sys.argv[sys.argv.index('-replace')+1]
-        newstring=sys.argv[sys.argv.index('-replace')+2]
+        oldstring=argv[argv.index('-replace')+1]
+        newstring=argv[argv.index('-replace')+2]
         if newstring == 'blank':
             newstring=''
         if doStdOut:
@@ -243,5 +243,8 @@ def run():
 
     if shorter>0:
         print shorter, 'sequences shorter than desired length'
-run()
+
+
+if __name__ == '__main__':
+    main(sys.argv)
 

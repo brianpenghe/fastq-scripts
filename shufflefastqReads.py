@@ -10,14 +10,14 @@ import sys
 import string
 import random
 
-def run():
+def main(argv):
 
-    if len(sys.argv) < 1:
-        print 'usage: python %s inputfilename' % sys.argv[0]
+    if len(argv) < 1:
+        print 'usage: python %s inputfilename' % argv[0]
         print '\tuse - for stdin; the script will print to stdout by default'
         sys.exit(1)
 
-    inputfilename = sys.argv[1]
+    inputfilename = argv[1]
 
     ReadList = []
 
@@ -63,5 +63,6 @@ def run():
 
     
 
-run()
+if __name__ == '__main__':
+    main(sys.argv)
 

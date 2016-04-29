@@ -11,14 +11,14 @@ import string
 import random
 from sets import Set
 
-def run():
+def main(argv):
 
-    if len(sys.argv) < 2:
-        print 'usage: python %s fastq outfileprefix' % sys.argv[0]
+    if len(argv) < 2:
+        print 'usage: python %s fastq outfileprefix' % argv[0]
         sys.exit(1)
 
-    input = sys.argv[1]
-    outprefix = sys.argv[2]
+    input = argv[1]
+    outprefix = argv[2]
 
     OutfileDict={}
 
@@ -50,4 +50,5 @@ def run():
     for lane in OutfileDict.keys():
         OutfileDict[lane].close()
 
-run()
+if __name__ == '__main__':
+    main(sys.argv)
