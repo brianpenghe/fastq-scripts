@@ -8,19 +8,19 @@
 
 import sys
 
-def run():
+def main(argv):
 
-    if len(sys.argv) < 3:
-        print 'usage: python %s fastq string newstring' % sys.argv[0]
+    if len(argv) < 3:
+        print 'usage: python %s fastq string newstring' % argv[0]
         print '\tUse - for stdin; the script will print to stdout by default'
         print '\tIf you want to replace spaces, use _space_ as the string character'
         sys.exit(1)
 
-    fastq = sys.argv[1]
-    oldstring = sys.argv[2]
+    fastq = argv[1]
+    oldstring = argv[2]
     if oldstring == '_space_':
         oldstring = ' '
-    newstring = sys.argv[3]
+    newstring = argv[3]
 
     i=0
     pos=1
@@ -50,5 +50,6 @@ def run():
             pos=1
             continue
 
-run()
+if __name__ == '__main__':
+    main(sys.argv)
 

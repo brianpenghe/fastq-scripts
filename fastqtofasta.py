@@ -14,23 +14,23 @@ try:
 except:
 	pass
 
-def run():
+def main(argv):
 
-    if len(sys.argv) < 2:
-        print 'usage: python %s inputfilename bpToKeep [-notrim] [-CS]' % sys.argv[0]
+    if len(argv) < 2:
+        print 'usage: python %s inputfilename bpToKeep [-notrim] [-CS]' % argv[0]
         print '\tuse - for stdin; the script will print to stdout by default'
         sys.exit(1)
 
-    inputfilename = sys.argv[1]
-    trim = int(sys.argv[2])
+    inputfilename = argv[1]
+    trim = int(argv[2])
 
     doTrim=True
-    if '-notrim' in sys.argv:
+    if '-notrim' in argv:
         doTrim=False
-        outputfilename = sys.argv[1].split('fastq')[0]+'fa'
+        outputfilename = argv[1].split('fastq')[0]+'fa'
 
     doCS=False
-    if '-CS' in sys.argv:
+    if '-CS' in argv:
         doCS=True
         doTrim=False
 #        print 'will treat data as color space; will not trim reads'
@@ -79,5 +79,6 @@ def run():
 #    if shorter>0:
 #        print shorter, 'sequences shorter than desired length, skipped'
 
-run()
+if __name__ == '__main__':
+    main(sys.argv)
 

@@ -15,19 +15,19 @@ try:
 except:
 	pass
 
-def run():
+def main(argv):
 
-    if len(sys.argv) < 1:
-        print 'usage: python %s <inputfilename> [-minFrequency value] [-PrintFrequencyDistribution outfile]' % sys.argv[0]
+    if len(argv) < 1:
+        print 'usage: python %s <inputfilename> [-minFrequency value] [-PrintFrequencyDistribution outfile]' % argv[0]
         print '\tUse - to specify standard input, the script will print to standard output by default'
         sys.exit(1)
 
-    inputfilename = sys.argv[1]
+    inputfilename = argv[1]
 
     doMinFreq = False
-    if '-minFrequency' in sys.argv:
+    if '-minFrequency' in argv:
         doMinFreq = True
-        MF = int(sys.argv[sys.argv.index('-minFrequency')+ 1])
+        MF = int(argv[argv.index('-minFrequency')+ 1])
 
     if inputfilename == '-':
         lineslist  = sys.stdin
@@ -68,9 +68,9 @@ def run():
         print '>read' + str(i)
         print seq
 
-    if '-PrintFrequencyDistribution' in sys.argv:
+    if '-PrintFrequencyDistribution' in argv:
         DistDict = {}
-        outfile = open(sys.argv[sys.argv.index('-PrintFrequencyDistribution')+ 1],'w')
+        outfile = open(argv[argv.index('-PrintFrequencyDistribution')+ 1],'w')
         for seq in SeqDict.keys():
             counts = SeqDict[seq]
             if DistDict.has_key(counts):
@@ -86,5 +86,6 @@ def run():
             outfile.write(outline + '\n')
         outfile.close()
 
-run()
+if __name__ == '__main__':
+    main(sys.argv)
 

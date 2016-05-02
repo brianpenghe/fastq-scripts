@@ -14,16 +14,16 @@ try:
 except:
 	pass
 
-def run():
+def main(argv):
 
-    if len(sys.argv) < 3:
-        print 'usage: python %s inputfilename outfilename [-f | -q]' % sys.argv[0]
+    if len(argv) < 3:
+        print 'usage: python %s inputfilename outfilename [-f | -q]' % argv[0]
         print '\tuse - for stdinout instead a input filename'
         sys.exit(1)
 
-    inputfilename = sys.argv[1]
-    outputfilename = sys.argv[2]
-    type = sys.argv[3]
+    inputfilename = argv[1]
+    outputfilename = argv[2]
+    type = argv[3]
 
     outfile = open(outputfilename, 'w')
 
@@ -83,5 +83,6 @@ def run():
         outfile.write(outline)
     outfile.close()
 
-run()
+if __name__ == '__main__':
+    main(sys.argv)
 
